@@ -41514,17 +41514,8 @@ module.exports = Home;
 "use strict";
 
 var React = require('react');
-var TrainerApi = require('../../api/trainerApi');
 
-var Trainers = React.createClass({displayName: "Trainers",
-  getInitialState: function() {
-    return {
-      trainers: []
-    };
-  },
-  componentWillMount: function() {
-    this.setState({ trainers: TrainerApi.getAllTrainers() });
-  },
+var TrainerList = React.createClass({displayName: "TrainerList",
 
 
   render: function() {
@@ -41539,15 +41530,13 @@ var Trainers = React.createClass({displayName: "Trainers",
 
     return (
       React.createElement("div", null, 
-        React.createElement("h1", null, " Trainers"), 
-
         React.createElement("table", {className: "table"}, 
           React.createElement("thead", null, 
             React.createElement("th", null, "ID"), 
             React.createElement("th", null, "Name")
          ), 
          React.createElement("tbody", null, 
-           this.state.trainers.map(createTrainerRow, this)
+           this.props.trainers.map(createTrainerRow, this)
          )
        )
       )
@@ -41555,9 +41544,41 @@ var Trainers = React.createClass({displayName: "Trainers",
   }
 });
 
+module.exports = TrainerList;
+
+},{"react":158}],165:[function(require,module,exports){
+"use strict";
+
+var React = require('react');
+var TrainerApi = require('../../api/trainerApi');
+var TrainerList = require('./trainerList');
+
+var Trainers = React.createClass({displayName: "Trainers",
+  getInitialState: function() {
+    return {
+      trainers: []
+    };
+  },
+  componentDidMount: function() {
+    if (this.isMounted()){
+      this.setState({ trainers: TrainerApi.getAllTrainers() });
+    }
+  },
+
+
+  render: function() {
+    return (
+      React.createElement("div", null, 
+        React.createElement("h1", null, " Trainers"), 
+        React.createElement(TrainerList, {trainers: this.state.trainers})
+      )
+    );
+  }
+});
+
 module.exports = Trainers;
 
-},{"../../api/trainerApi":159,"react":158}],165:[function(require,module,exports){
+},{"../../api/trainerApi":159,"./trainerList":164,"react":158}],166:[function(require,module,exports){
 $ = jQuery = require('jquery');
 
 var React = require('react');
@@ -41594,4 +41615,4 @@ function render () {
 window.addEventListener('hashchange', render);
 render();
 
-},{"./components/about/aboutPage":161,"./components/common/header":162,"./components/homepage":163,"./components/trainers/trainerPage":164,"jquery":1,"react":158}]},{},[165]);
+},{"./components/about/aboutPage":161,"./components/common/header":162,"./components/homepage":163,"./components/trainers/trainerPage":165,"jquery":1,"react":158}]},{},[166]);
