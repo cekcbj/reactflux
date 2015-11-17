@@ -14,4 +14,6 @@ var routes = (
     <Route name = "trainers" handler={require('./components/trainers/trainerPage')} />
     <Route name = "about" handler={require('./components/about/aboutPage')} />
     </Route>
-)
+);
+
+module.exports = routes;
