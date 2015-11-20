@@ -17,6 +17,7 @@ var routes = (
     <DefaultRoute handler={require('./components/homePage')}/>
     <Route name = "trainers" handler={require('./components/trainers/trainerPage')} />
     <Route name = "about" handler={require('./components/about/aboutPage')} />
+    <Route name = "addTrainer" path="trainer" handler={require('./components/trainers/manageTrainerPage')} />
     <NotFoundRoute handler={require('./components/errorPage')} />
     <Redirect from="about-us" to="about" />
     <Redirect from="traynurs" to="trainers" />

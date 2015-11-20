@@ -44539,6 +44539,21 @@ var Home = React.createClass({displayName: "Home",
 module.exports = Home;
 
 },{"react":197,"react-router":28}],205:[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+
+var ManageTrainerPage = React.createClass({displayName: "ManageTrainerPage",
+  render:function() {
+    return(
+       React.createElement("h1", null, " Manage Trainer ")
+    );
+  }
+});
+
+module.exports = ManageTrainerPage;
+
+},{"react":197}],206:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -44574,12 +44589,14 @@ var TrainerList = React.createClass({displayName: "TrainerList",
 
 module.exports = TrainerList;
 
-},{"react":197}],206:[function(require,module,exports){
+},{"react":197}],207:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
+var Router = require('react-router')
 var TrainerApi = require('../../api/trainerApi');
 var TrainerList = require('./trainerList');
+var Link = Router.Link;
 
 var Trainers = React.createClass({displayName: "Trainers",
   getInitialState: function() {
@@ -44598,6 +44615,7 @@ var Trainers = React.createClass({displayName: "Trainers",
     return (
       React.createElement("div", null, 
         React.createElement("h1", null, " Trainers"), 
+        React.createElement(Link, {to: "addTrainer", className: "btn btn-default"}, "Add Trainer"), 
         React.createElement(TrainerList, {trainers: this.state.trainers})
       )
     );
@@ -44606,7 +44624,7 @@ var Trainers = React.createClass({displayName: "Trainers",
 
 module.exports = Trainers;
 
-},{"../../api/trainerApi":198,"./trainerList":205,"react":197}],207:[function(require,module,exports){
+},{"../../api/trainerApi":198,"./trainerList":206,"react":197,"react-router":28}],208:[function(require,module,exports){
 "use strict";
 var React = require('react');
 
@@ -44618,7 +44636,7 @@ Router.run(routes, function(Handler) {
   React.render(React.createElement(Handler, null), document.getElementById('app'));
 });
 
-},{"./routes":208,"react":197,"react-router":28}],208:[function(require,module,exports){
+},{"./routes":209,"react":197,"react-router":28}],209:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -44638,6 +44656,7 @@ var routes = (
     React.createElement(DefaultRoute, {handler: require('./components/homePage')}), 
     React.createElement(Route, {name: "trainers", handler: require('./components/trainers/trainerPage')}), 
     React.createElement(Route, {name: "about", handler: require('./components/about/aboutPage')}), 
+    React.createElement(Route, {name: "addTrainer", path: "trainer", handler: require('./components/trainers/manageTrainerPage')}), 
     React.createElement(NotFoundRoute, {handler: require('./components/errorPage')}), 
     React.createElement(Redirect, {from: "about-us", to: "about"}), 
     React.createElement(Redirect, {from: "traynurs", to: "trainers"}), 
@@ -44647,4 +44666,4 @@ var routes = (
 
 module.exports = routes;
 
-},{"./components/about/aboutPage":200,"./components/app":201,"./components/errorPage":203,"./components/homePage":204,"./components/trainers/trainerPage":206,"react":197,"react-router":28}]},{},[207]);
+},{"./components/about/aboutPage":200,"./components/app":201,"./components/errorPage":203,"./components/homePage":204,"./components/trainers/manageTrainerPage":205,"./components/trainers/trainerPage":207,"react":197,"react-router":28}]},{},[208]);
