@@ -44542,18 +44542,70 @@ module.exports = Home;
 'use strict';
 
 var React = require('react');
+var TrainerForm = require('./trainerForm');
 
 var ManageTrainerPage = React.createClass({displayName: "ManageTrainerPage",
+  getInitialState: function() {
+    return{
+      trainer: {id: '', firstName: '', lastName:''}
+    };
+  },
+
+  setTrainerState: function(event) {
+    var field = event.target.name;
+    var value = event.target.value;
+    this.state.trainer[field] = value;
+    return this.setState({trainer:this.state.trainer});
+  },
+
   render:function() {
     return(
-       React.createElement("h1", null, " Manage Trainer ")
+       React.createElement(TrainerForm, {
+       trainer: this.state.trainer, 
+       onChange: this.setTrainerState})
     );
   }
 });
 
 module.exports = ManageTrainerPage;
 
-},{"react":197}],206:[function(require,module,exports){
+},{"./trainerForm":206,"react":197}],206:[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+
+var TrainerForm = React.createClass({displayName: "TrainerForm",
+  render:function() {
+    return(
+       React.createElement("form", null, 
+         React.createElement("h1", null, "Manage Trainer"), 
+         React.createElement("label", {htmlFor: "firstName"}, "First Name"), 
+         React.createElement("input", {type: "text", 
+           name: "firstName", 
+           className: "form-control", 
+           ref: "firstName", 
+           onChange: this.props.onChange, 
+           value: this.props.trainer.firstName}), 
+         React.createElement("br", null), 
+
+         React.createElement("label", {htmlFor: "lastName"}, "Last Name"), 
+         React.createElement("input", {type: "text", 
+           name: "lastName", 
+           className: "form-control", 
+           ref: "lastName", 
+           onChange: this.props.onChange, 
+           value: this.props.trainer.lastName}), 
+         React.createElement("br", null), 
+
+         React.createElement("input", {type: "submit", value: "Save", className: "btn btn-default"})
+      )
+    );
+  }
+});
+
+module.exports = TrainerForm;
+
+},{"react":197}],207:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -44589,7 +44641,7 @@ var TrainerList = React.createClass({displayName: "TrainerList",
 
 module.exports = TrainerList;
 
-},{"react":197}],207:[function(require,module,exports){
+},{"react":197}],208:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -44624,7 +44676,7 @@ var Trainers = React.createClass({displayName: "Trainers",
 
 module.exports = Trainers;
 
-},{"../../api/trainerApi":198,"./trainerList":206,"react":197,"react-router":28}],208:[function(require,module,exports){
+},{"../../api/trainerApi":198,"./trainerList":207,"react":197,"react-router":28}],209:[function(require,module,exports){
 "use strict";
 var React = require('react');
 
@@ -44636,7 +44688,7 @@ Router.run(routes, function(Handler) {
   React.render(React.createElement(Handler, null), document.getElementById('app'));
 });
 
-},{"./routes":209,"react":197,"react-router":28}],209:[function(require,module,exports){
+},{"./routes":210,"react":197,"react-router":28}],210:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -44666,4 +44718,4 @@ var routes = (
 
 module.exports = routes;
 
-},{"./components/about/aboutPage":200,"./components/app":201,"./components/errorPage":203,"./components/homePage":204,"./components/trainers/manageTrainerPage":205,"./components/trainers/trainerPage":207,"react":197,"react-router":28}]},{},[208]);
+},{"./components/about/aboutPage":200,"./components/app":201,"./components/errorPage":203,"./components/homePage":204,"./components/trainers/manageTrainerPage":205,"./components/trainers/trainerPage":208,"react":197,"react-router":28}]},{},[209]);
